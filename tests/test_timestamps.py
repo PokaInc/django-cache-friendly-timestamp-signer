@@ -12,16 +12,7 @@ class TimestampTestCase(TestCase):
         self.signer = TimeFramedTimestampSigner(time_frame_seconds=1800, uniform_distribution=False)
 
     def test_signature_stays_identical_within_timeframe(self):
-        initial_datetime = datetime.datetime(
-            year=2017,
-            month=1,
-            day=1,
-            hour=10,
-            minute=0,
-            second=0
-        )  # 10:00:00
-
-        with freeze_time(initial_datetime) as frozen_datetime:
+        with freeze_time("2017-01-01 00:00:00") as frozen_datetime:
             sign_10_0 = self.signer.sign("test")
 
             frozen_datetime.tick(delta=datetime.timedelta(minutes=10))
@@ -39,11 +30,12 @@ class TimestampTestCase(TestCase):
             frozen_datetime.tick(delta=datetime.timedelta(minutes=10))
             sign_10_40 = self.signer.sign("test")
 
-            assert sign_10_0 == sign_10_10
-            assert sign_10_0 == sign_10_20
-            assert sign_10_0 == sign_10_29
+            # From 10:00 to 10:29 the same signature is returned.
+            assert len({sign_10_0, sign_10_10, sign_10_20, sign_10_29}) == 1
 
+            # Trigger point at 10:30
             assert sign_10_0 != sign_10_30
             assert sign_10_0 != sign_10_40
 
+            # Then same signature from 10:30 to 10:59
             assert sign_10_30 == sign_10_40
