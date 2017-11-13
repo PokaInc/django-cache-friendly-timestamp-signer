@@ -8,4 +8,15 @@ python:
   - "3.6"
   - "3.7"
 
-script: ./runtests.py
+install:
+  - pip install coverage detox tox-travis
+
+script:
+  - coverage erase
+  - detox
+
+after_success:
+  - coverage combine --append
+  - coverage report -m
+  - pip install codecov
+  - codecov
