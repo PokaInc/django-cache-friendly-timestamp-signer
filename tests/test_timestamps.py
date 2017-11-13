@@ -9,7 +9,7 @@ class TimestampTestCase(TestCase):
 
     def setUp(self):
         # 30 seconds time-frames
-        self.signer = TimeFramedTimestampSigner(time_frame_seconds=30)
+        self.signer = TimeFramedTimestampSigner(time_frame_seconds=30, uniform_distribution=False)
 
     def test_signature_stays_identical_within_timeframe(self):
         initial_datetime = datetime.datetime(
