@@ -8,4 +8,5 @@ class NoopTestCase(TestCase):
         pass
 
     def test_noop(self):
-        assert True
+        from django_cache_friendly_timestamp_signer import noop
+        assert noop() == 'noop'
