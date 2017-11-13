@@ -1,0 +1,3 @@
+
+def noop():
+    return "noop"
