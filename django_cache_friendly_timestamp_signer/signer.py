@@ -15,7 +15,7 @@ class TimeFramedTimestampSigner(signing.TimestampSigner):
 
     def sign(self, value):
         self._uniform_distribution_salt = hash(value)
-        return super().sign(value)
+        return super(TimeFramedTimestampSigner, self).sign(value)
 
     def timestamp(self):
         original = int(time.time())
