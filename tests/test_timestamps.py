@@ -8,8 +8,8 @@ from django_cache_friendly_timestamp_signer.signer import TimeFramedTimestampSig
 class TimestampTestCase(TestCase):
 
     def setUp(self):
-        # 30 seconds time-frames
-        self.signer = TimeFramedTimestampSigner(time_frame_seconds=30, uniform_distribution=False)
+        # 30 minutes time-frames
+        self.signer = TimeFramedTimestampSigner(time_frame_seconds=1800, uniform_distribution=False)
 
     def test_signature_stays_identical_within_timeframe(self):
         initial_datetime = datetime.datetime(
@@ -22,28 +22,28 @@ class TimestampTestCase(TestCase):
         )  # 10:00:00
 
         with freeze_time(initial_datetime) as frozen_datetime:
-            sign_10_0_0 = self.signer.sign("test")
+            sign_10_0 = self.signer.sign("test")
 
-            frozen_datetime.tick(delta=datetime.timedelta(seconds=10))
-            sign_10_0_10 = self.signer.sign("test")
+            frozen_datetime.tick(delta=datetime.timedelta(minutes=10))
+            sign_10_10 = self.signer.sign("test")
 
-            frozen_datetime.tick(delta=datetime.timedelta(seconds=10))
-            sign_10_0_20 = self.signer.sign("test")
+            frozen_datetime.tick(delta=datetime.timedelta(minutes=10))
+            sign_10_20 = self.signer.sign("test")
 
-            frozen_datetime.tick(delta=datetime.timedelta(seconds=9))
-            sign_10_0_29 = self.signer.sign("test")
+            frozen_datetime.tick(delta=datetime.timedelta(minutes=9))
+            sign_10_29 = self.signer.sign("test")
 
-            frozen_datetime.tick(delta=datetime.timedelta(seconds=1))
-            sign_10_0_30 = self.signer.sign("test")
+            frozen_datetime.tick(delta=datetime.timedelta(minutes=1))
+            sign_10_30 = self.signer.sign("test")
 
-            frozen_datetime.tick(delta=datetime.timedelta(seconds=10))
-            sign_10_0_40 = self.signer.sign("test")
+            frozen_datetime.tick(delta=datetime.timedelta(minutes=10))
+            sign_10_40 = self.signer.sign("test")
 
-            assert sign_10_0_0 == sign_10_0_10
-            assert sign_10_0_0 == sign_10_0_20
-            assert sign_10_0_0 == sign_10_0_29
+            assert sign_10_0 == sign_10_10
+            assert sign_10_0 == sign_10_20
+            assert sign_10_0 == sign_10_29
 
-            assert sign_10_0_0 != sign_10_0_30
-            assert sign_10_0_0 != sign_10_0_40
+            assert sign_10_0 != sign_10_30
+            assert sign_10_0 != sign_10_40
 
-            assert sign_10_0_30 == sign_10_0_40
+            assert sign_10_30 == sign_10_40

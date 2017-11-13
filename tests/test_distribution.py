@@ -11,8 +11,8 @@ from django_cache_friendly_timestamp_signer.signer import TimeFramedTimestampSig
 class UniformDistributionTestCase(TestCase):
 
     def setUp(self):
-        # 30 seconds time-frames
-        self.signer = TimeFramedTimestampSigner(time_frame_seconds=30, uniform_distribution=True)
+        # 30 minutes time-frames
+        self.signer = TimeFramedTimestampSigner(time_frame_seconds=1800, uniform_distribution=True)
         self.base_signer = Signer(salt=self.signer.salt)
 
     def _extract_timestamp(self, signed_value):
