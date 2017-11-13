@@ -1,13 +1,25 @@
 import time
 import random
+
+from datetime import timedelta
 from django.core import signing
 from django.utils import baseconv
 
 
 class TimeFramedTimestampSigner(signing.TimestampSigner):
 
-    def __init__(self, time_frame_seconds, uniform_distribution=True, **kwargs):
-        self.time_frame_seconds = time_frame_seconds
+    def __init__(self, time_frame, uniform_distribution=True, **kwargs):
+        if isinstance(time_frame, timedelta):
+            self.time_frame_seconds = time_frame.total_seconds()
+
+        elif isinstance(time_frame, int):
+            self.time_frame_seconds = time_frame
+
+        else:
+            raise AssertionError("time_frame must be either int(seconds) or datetime.timedelta")
+
+        assert self.time_frame_seconds >= 0, "time_frame must be positive"
+
         self.uniform_distribution = uniform_distribution
         self._uniform_distribution_salt = None
 

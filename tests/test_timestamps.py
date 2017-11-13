@@ -9,7 +9,10 @@ class TimestampTestCase(TestCase):
 
     def setUp(self):
         # 30 minutes time-frames
-        self.signer = TimeFramedTimestampSigner(time_frame_seconds=1800, uniform_distribution=False)
+        self.signer = TimeFramedTimestampSigner(
+            time_frame=datetime.timedelta(minutes=30),
+            uniform_distribution=False,
+        )
 
     def test_signature_stays_identical_within_timeframe(self):
         with freeze_time("2017-01-01 00:00:00") as frozen_datetime:

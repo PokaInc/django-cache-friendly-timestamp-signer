@@ -12,7 +12,10 @@ class UniformDistributionTestCase(TestCase):
 
     def setUp(self):
         # 30 minutes time-frames
-        self.signer = TimeFramedTimestampSigner(time_frame_seconds=1800, uniform_distribution=True)
+        self.signer = TimeFramedTimestampSigner(
+            time_frame=datetime.timedelta(minutes=30),
+            uniform_distribution=True,
+        )
         self.base_signer = Signer(salt=self.signer.salt)
 
     def _extract_timestamp(self, signed_value):
