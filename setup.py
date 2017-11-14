@@ -1,16 +1,11 @@
 from setuptools import setup, find_packages
 
-f = open('README.md')
-readme = f.read()
-f.close()
-
 version = '0.1.0'
 
 setup(
     name='django-cache-friendly-timestamp-signer',
     version=version,
     description="Signed URLs that can be kept in browser's cache",
-    long_description=readme,
     keywords="signed url timestamp cache django",
     author='Raphael Riel',
     author_email='rriel@poka.io',
