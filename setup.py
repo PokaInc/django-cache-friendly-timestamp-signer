@@ -4,12 +4,12 @@ f = open('README.md')
 readme = f.read()
 f.close()
 
-version = '0.0.1'
+version = '0.1.0'
 
 setup(
     name='django-cache-friendly-timestamp-signer',
     version=version,
-    description="Cached URLs that can be kept in browser's cache",
+    description="Signed URLs that can be kept in browser's cache",
     long_description=readme,
     keywords="signed url timestamp cache django",
     author='Raphael Riel',
@@ -37,7 +37,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Framework :: Django',
     ],
+    python_requires='>=2.7, >=3.4.*, <4',
     zip_safe=False,
 )
