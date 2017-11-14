@@ -8,12 +8,12 @@ python:
   - "3.6"
 
 install:
-  - pip install coverage detox tox-travis
+  - pip install coverage detox tox-travis flake8
 
 script:
   - coverage erase
   - detox
-  - make check
+  - flake8 django_cache_friendly_timestamp_signer/
 
 after_success:
   - coverage combine --append
