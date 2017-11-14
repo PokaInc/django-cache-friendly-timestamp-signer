@@ -1,3 +1,1 @@
 
-def noop():
-    return "noop"
