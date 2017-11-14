@@ -38,6 +38,5 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    python_requires='>=2.7, >=3.4.*, <4',
     zip_safe=False,
 )
