@@ -22,15 +22,15 @@ class ConfigurationTestCase(TestCase):
         assert signer.time_frame_seconds == 10
 
     def test_raise_on_invalid_time_frame(self):
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(TypeError):
             TimeFramedTimestampSigner("test")
 
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(TypeError):
             # Can't work with float in base62
             TimeFramedTimestampSigner(30.25)
 
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             TimeFramedTimestampSigner(-100)
 
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             TimeFramedTimestampSigner(datetime.timedelta(days=-5))
