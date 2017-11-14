@@ -16,7 +16,9 @@ class TimeFramedTimestampSigner(signing.TimestampSigner):
             self.time_frame_seconds = time_frame
 
         else:
-            raise TypeError("time_frame must be either int(seconds) or datetime.timedelta")
+            raise TypeError(
+                "time_frame must be either int(seconds) or datetime.timedelta"
+            )
 
         if self.time_frame_seconds < 0:
             raise ValueError("time_frame must be positive")

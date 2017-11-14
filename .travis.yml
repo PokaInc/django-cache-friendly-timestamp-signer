@@ -13,6 +13,7 @@ install:
 script:
   - coverage erase
   - detox
+  - make check
 
 after_success:
   - coverage combine --append
