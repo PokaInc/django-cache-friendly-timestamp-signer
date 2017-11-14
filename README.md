@@ -2,7 +2,7 @@
 Signed URLs that can be kept in browser's cache.
 
 Extension to Django's [django.core.signing.TimestampSigner](https://docs.djangoproject.com/en/1.11/topics/signing/#verifying-timestamped-values) allowing signature to remain identical within a given time frame.
-Primary use case is for signed URLs that are fetched by a browser multiple times within a given duration. Making sure the URL (and query params) won't change from request to another will allow a browser to reuse its cached data.
+Primary use case is for signed URLs that are fetched by a browser multiple times within a given duration. Making sure the URL (and query params) won't change from request to request will allow a browser to reuse its cached data.
 
 [![Build Status](https://travis-ci.org/PokaInc/django-cache-friendly-timestamp-signer.svg?branch=master)](https://travis-ci.org/PokaInc/django-cache-friendly-timestamp-signer)
 
