@@ -25,7 +25,7 @@ class UniformDistributionTestCase(TestCase):
 
     def _extract_base_delta(self, signed_value):
         timestamp = self._extract_timestamp(signed_value)
-        delta = timestamp - (int(timestamp / self.signer.time_frame_seconds) * self.signer.time_frame_seconds)
+        delta = timestamp % self.signer.time_frame_seconds
         return delta
 
     def test_signature_delay_always_the_same_across_time_frames(self):

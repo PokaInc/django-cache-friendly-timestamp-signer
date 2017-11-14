@@ -15,7 +15,7 @@ class TimestampTestCase(TestCase):
         )
 
     def test_signature_stays_identical_within_timeframe(self):
-        with freeze_time("2017-01-01 00:00:00") as frozen_datetime:
+        with freeze_time("2017-01-01 10:00:00") as frozen_datetime:
             sign_10_0 = self.signer.sign("test")
 
             frozen_datetime.tick(delta=datetime.timedelta(minutes=10))
