@@ -16,8 +16,7 @@ setup(
     include_package_data=True,
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        # 'Development Status :: 5 - Production/Stable',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
